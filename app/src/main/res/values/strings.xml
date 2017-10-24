@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Matka</string>
+    <string name="game_1">Shakti</string>
+    <string name="game_2">Bhothnath</string>
+    <string name="game_3">Worly</string>
+    <string name="admin">\@Admin</string>
+</resources>
