@@ -2,9 +2,9 @@ package lottery.in.matka.fragments;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +14,6 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.gson.Gson;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -28,24 +27,34 @@ public class CharttFragment extends BaseFragment {
     @Bind(R.id.recyclerView)
     RecyclerView mMessageRecyclerView;
 
-    private LinearLayoutManager mLinearLayoutManager;
+    private GridLayoutManager mLinearLayoutManager;
     private FirebaseRecyclerAdapter<ChartItem, MessageViewHolder> mFirebaseAdapter;
     private DatabaseReference mFirebaseDatabaseReference;
 
-    public static final String CHART_SHAKTI = "chart_shakti";
+    // public static final String CHART_SHAKTI = "chart_shakti";
+    private String TABLE_NAME;
+    private String title;
+
+    public static Fragment newInstance(String showChartFor, String title) {
+        CharttFragment fragment = new CharttFragment();
+        fragment.TABLE_NAME = showChartFor;
+        fragment.title = title;
+        return fragment;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState) {
         //  activity.selectedFragment = this;
         //  activity.setTheme(R.style.ThemeOrange);
+        activity.setTitle(title);
         View v = inflater.inflate(R.layout.fragment_chart, container, false);
         try {
             ButterKnife.bind(this, v);
-            mLinearLayoutManager = new LinearLayoutManager(context);
-            mLinearLayoutManager.setStackFromEnd(true);
+            mLinearLayoutManager = new GridLayoutManager(context, 6);
+            // mLinearLayoutManager.setStackFromEnd(true);
             mFirebaseDatabaseReference = FirebaseDatabase.getInstance().getReference();
             initRecycle();
-            mFirebaseDatabaseReference.child(CHART_SHAKTI).push().setValue(new ChartItem());
+            //  mFirebaseDatabaseReference.child(CHART_SHAKTI).push().setValue(new ChartItem());
 
         } catch (Exception e) {
             ISFLog.e(e);
@@ -77,16 +86,15 @@ public class CharttFragment extends BaseFragment {
                 ChartItem.class,
                 R.layout.chart_item,
                 MessageViewHolder.class,
-                mFirebaseDatabaseReference.child(CHART_SHAKTI)) {
+                mFirebaseDatabaseReference.child(TABLE_NAME)) {
 
             @Override
             protected ChartItem parseSnapshot(DataSnapshot snapshot) {
-                ChartItem friendlyMessage = super.parseSnapshot(snapshot);
                 /*if (friendlyMessage != null) {
                     friendlyMessage.setId(snapshot.getKey());
                 }*/
-                ISFLog.e("json", "" + new Gson().toJson(friendlyMessage));
-                return friendlyMessage;
+                //   ISFLog.e("json", "" + new Gson().toJson(friendlyMessage));
+                return super.parseSnapshot(snapshot);
             }
 
             @Override
@@ -97,6 +105,8 @@ public class CharttFragment extends BaseFragment {
                     holder.tvSingleOpen.setText(vo.getSingleOpen());
                     holder.tvSingleClose.setText(vo.getSingleClose());
                     holder.tvPattiClose.setText(vo.getPattiClose());
+                    holder.tvDate.setText(vo.getDate().toString());
+                //    holder.tvDate.setVisibility(vo.checkIfMonday() ? View.VISIBLE : View.GONE);
                     if (vo.isDoubling()) {
                         holder.tvPattiOpen.setTextColor(Color.RED);
                         holder.tvSingleOpen.setTextColor(Color.RED);
@@ -137,30 +147,6 @@ public class CharttFragment extends BaseFragment {
         }
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        activity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        //  activity.selectedFragment = this;
-        try {
-            if (getView() != null) {
-                getView().setFocusableInTouchMode(true);
-                getView().requestFocus();
-                getView().setOnKeyListener(new View.OnKeyListener() {
-                    @Override
-                    public boolean onKey(View v, int keyCode, KeyEvent event) {
-                        if (event.getAction() == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_BACK) {
-                            onBackPressed();
-                        }
-                        return true;
-                    }
-                });
-            }
-        } catch (Exception e) {
-            ISFLog.e(e);
-        }
-    }
-
 
    /* public void showBaseLoader() {
         showLoader(context);
@@ -175,6 +161,8 @@ public class CharttFragment extends BaseFragment {
         TextView tvSingleOpen;
         @Bind(R.id.tvSingleClose)
         TextView tvSingleClose;
+        @Bind(R.id.tvDate)
+        TextView tvDate;
 /*
         @Bind(R.id.cvMain)
         CardView cvMain;*/

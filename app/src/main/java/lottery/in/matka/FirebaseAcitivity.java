@@ -11,14 +11,19 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.TedPermission;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import lottery.in.matka.interfaces.DatabaseListener;
+import lottery.in.matka.models.ChartItem;
 import lottery.in.matka.utils.Constant;
 import lottery.in.matka.utils.ISFLog;
 import lottery.in.matka.utils.Util;
@@ -27,10 +32,10 @@ import lottery.in.matka.utils.Util;
  * Created by WarFly on 10/23/2017.
  */
 
-public abstract class BaseAcitivity extends AppCompatActivity {
+public abstract class FirebaseAcitivity extends AppCompatActivity {
     private static final String TAG = "FIREBASE";
     private FirebaseAuth mAuth;
-    private FirebaseAuth.AuthStateListener mAuthListener;
+    // private FirebaseAuth.AuthStateListener mAuthListener;
     private DatabaseReference mDatabase;
 
 
@@ -38,7 +43,7 @@ public abstract class BaseAcitivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mAuth = FirebaseAuth.getInstance();
-        mAuthListener = new FirebaseAuth.AuthStateListener() {
+      /*  mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
@@ -53,7 +58,7 @@ public abstract class BaseAcitivity extends AppCompatActivity {
                 }
             }
         };
-
+*/
         mDatabase = FirebaseDatabase.getInstance().getReference();
         mDatabase.keepSynced(true);
     }
@@ -64,7 +69,8 @@ public abstract class BaseAcitivity extends AppCompatActivity {
                     .setPermissionListener(new PermissionListener() {
                         @Override
                         public void onPermissionGranted() {
-                            mAuth.addAuthStateListener(mAuthListener);
+                            signInWithFirebase(getDeviceId() + "@FIREBASE.COM");
+                            // mAuth.addAuthStateListener(mAuthListener);
                         }
 
                         @Override
@@ -93,9 +99,9 @@ public abstract class BaseAcitivity extends AppCompatActivity {
     @Override
     public void onStop() {
         super.onStop();
-        if (mAuthListener != null) {
-            mAuth.removeAuthStateListener(mAuthListener);
-            //  mAuth.signOut();
+        if (mAuth != null) {
+            //  mAuth.removeAuthStateListener(mAuthListener);
+            mAuth.signOut();
         }
     }
 
@@ -111,7 +117,7 @@ public abstract class BaseAcitivity extends AppCompatActivity {
                         // signed in user can be handled in the listener.
                         if (!task.isSuccessful()) {
                             ISFLog.d(TAG, "signInWithEmail:failed\n" + task.getException());
-                            Util.showToast(BaseAcitivity.this, Constant.AUTH_FAIL);
+                            Util.showToast(FirebaseAcitivity.this, Constant.AUTH_FAIL);
                             signupWithFirebase(getDeviceId() + "@FIREBASE.COM");
                         } else {
                             loginSuccessfull();
@@ -132,7 +138,7 @@ public abstract class BaseAcitivity extends AppCompatActivity {
                         // the auth state listener will be notified and logic to handle the
                         // signed in user can be handled in the listener.
                         if (!task.isSuccessful()) {
-                            Util.showToast(BaseAcitivity.this, Constant.AUTH_FAIL);
+                            Util.showToast(FirebaseAcitivity.this, Constant.AUTH_FAIL);
                         } else {
                             loginSuccessfull();
                         }
@@ -146,5 +152,36 @@ public abstract class BaseAcitivity extends AppCompatActivity {
         TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
         ISFLog.e("imei number ", telephonyManager.getDeviceId());
         return telephonyManager.getDeviceId();
+    }
+
+    public void fetchChart(final DatabaseListener listener, final String tableName) {
+
+        ValueEventListener gameValueListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                ISFLog.d(Constant.TABLE_CHART_SHAKTI, "onDataChange");
+                List<ChartItem> chartList = new ArrayList<>();
+                try {
+                    for (DataSnapshot snap : dataSnapshot.getChildren()) {
+                        chartList.add(snap.getValue(ChartItem.class));
+                          if (snap.getValue(ChartItem.class).isFirstDayOfWeek())
+                        ISFLog.e("isMonday", "__" + snap.getValue(ChartItem.class).getSingleOpen());
+                    }
+                } catch (Exception e) {
+                    ISFLog.e(e);
+                }
+                listener.onSuccess(tableName, chartList);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                listener.onFailure(databaseError.toException());
+            }
+        };
+        try {
+            mDatabase.child(tableName).addListenerForSingleValueEvent(gameValueListener);
+        } catch (Exception e) {
+            ISFLog.e(e);
+        }
     }
 }

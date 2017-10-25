@@ -9,21 +9,23 @@ import android.os.Build;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
-import android.transition.Slide;
-import android.view.Gravity;
+import android.transition.Explode;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
 import java.io.File;
+import java.util.List;
 
 import lottery.in.matka.MainActivity;
 import lottery.in.matka.R;
 import lottery.in.matka.animate.DetailsTransition;
+import lottery.in.matka.models.ChartItem;
 import lottery.in.matka.utils.Constant;
 import lottery.in.matka.utils.ISFLog;
 
 
-public class BaseFragment extends Fragment {
+public abstract class BaseFragment extends Fragment {
     public Context context;
     public MainActivity activity;
     public FragmentManager fragmentManager;
@@ -209,7 +211,7 @@ public class BaseFragment extends Fragment {
     }*/
 
 
-    void showBaseLoader(Context context, String msg) {
+    void showBaseLoader(String msg) {
         try {
             progressDialog = ProgressDialog.show(context, "", "", true);
             progressDialog.setCancelable(msg.equalsIgnoreCase(Constant.CANCEL));
@@ -335,20 +337,16 @@ public class BaseFragment extends Fragment {
         }
     }*/
 
-    public void gotoChartFragment(Fragment prevFrag, int showChartFor) {
+    public void gotoChartFragment(Fragment prevFrag, String showChartFor, String title, List<ChartItem> response) {
         //    Resources res = context.getResources();
-        Fragment newFrag;
-        if (showChartFor > 0)
-            newFrag = ChartFragment.newInstance(showChartFor);
-        else {
-            newFrag = new CharttFragment();//.newInstance(showChartFor);
-        }
+        Fragment newFrag = ChartFragment.newInstance(showChartFor, title, response);
+
         try {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                prevFrag.setExitTransition(new Slide(Gravity.START));
+                //   prevFrag.setExitTransition(new Explode());
                 newFrag.setSharedElementEnterTransition(new DetailsTransition());
-                newFrag.setEnterTransition(new Slide(Gravity.END));
-                //  newFrag.setExitTransition(new Slide(Gravity.START));
+                newFrag.setEnterTransition(new Explode());
+                newFrag.setExitTransition(new Explode());
                 newFrag.setAllowEnterTransitionOverlap(false);
                 prevFrag.setAllowEnterTransitionOverlap(false);
                 newFrag.setAllowReturnTransitionOverlap(false);
@@ -387,4 +385,29 @@ public class BaseFragment extends Fragment {
             ISFLog.e(e);
         }
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        //activity.selectedFragment = this;
+        try {
+            if (getView() != null) {
+                getView().setFocusableInTouchMode(true);
+                getView().requestFocus();
+                getView().setOnKeyListener(new View.OnKeyListener() {
+                    @Override
+                    public boolean onKey(View v, int keyCode, KeyEvent event) {
+                        if (event.getAction() == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_BACK) {
+                            onBackPressed();
+                        }
+                        return true;
+                    }
+                });
+            }
+        } catch (Exception e) {
+            ISFLog.e(e);
+        }
+    }
+
+    abstract void onBackPressed();
 }

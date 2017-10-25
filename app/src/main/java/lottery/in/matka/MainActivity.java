@@ -8,7 +8,7 @@ import butterknife.ButterKnife;
 import lottery.in.matka.fragments.DashboardFragment;
 import lottery.in.matka.utils.Util;
 
-public class MainActivity extends BaseAcitivity {
+public class MainActivity extends FirebaseAcitivity {
     @Bind(R.id.toolbar)
     public Toolbar toolbar;
 
@@ -18,8 +18,6 @@ public class MainActivity extends BaseAcitivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
-
-
     }
 
     @Override

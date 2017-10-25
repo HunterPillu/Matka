@@ -21,6 +21,7 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
+    // Firebase UI
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.jakewharton:butterknife:7.0.1'
     compile 'com.android.support:design:25.3.1'
@@ -28,12 +29,13 @@ dependencies {
     compile 'com.google.firebase:firebase-core:10.2.6'
     compile 'com.google.firebase:firebase-auth:10.2.6'
     compile 'com.google.firebase:firebase-database:10.2.6'
-    compile "com.google.firebase:firebase-messaging:10.2.6"
-    // Firebase UI
+    compile 'com.google.firebase:firebase-messaging:10.2.6'
     compile 'com.firebaseui:firebase-ui-database:1.2.0'
     compile 'gun0912.ted:tedpermission:1.0.3'
     compile 'com.google.code.gson:gson:2.7'
+    compile 'com.android.support:support-v4:25.3.1'
 }
+
 
 
 apply plugin: 'com.google.gms.google-services'
