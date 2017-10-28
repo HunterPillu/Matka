@@ -6,12 +6,6 @@ import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.widget.Toast;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -22,32 +16,6 @@ public class Util {
 
     public Util() {
     }
-
-    /**
-     * Copy a file locally from Source to Target paths
-     */
-    public static void FCopy(String fnameS, String fnameT) {
-
-        try {
-            InputStream in = new FileInputStream(fnameT);
-            OutputStream out = new FileOutputStream(new File(fnameS));
-            byte[] buffer = new byte[1024];
-            int read;
-            while ((read = in.read(buffer)) != -1) {
-                out.write(buffer, 0, read);
-            }
-            in.close();
-            in = null;
-            // write the output file
-            out.flush();
-            out.close();
-            out = null;
-        } catch (FileNotFoundException fnfe1) {
-        } catch (Exception e) {
-        }
-        // ------------------------------------
-    }
-
 
     public static String getCurrentdate(String dateFormat) {
         String dateCurrent = "";
@@ -60,6 +28,19 @@ public class Util {
             ISFLog.e(e);
         }
         return dateCurrent;
+    }
+
+    public static Date convertStringToDate(String dateString){
+        Date date=null;
+        try {
+            Calendar c = Calendar.getInstance();
+            String[] arr=dateString.split("-");
+            c.set(Integer.parseInt(arr[2]),Integer.parseInt(arr[1]),Integer.parseInt(arr[0]));
+            date = c.getTime();
+        } catch (Exception e) {
+            ISFLog.e(e);
+        }
+        return date;
     }
 
     public static String getCurrentdate(Date date) {
@@ -82,9 +63,9 @@ public class Util {
             Calendar c = Calendar.getInstance();
             Date date = c.getTime();
             SimpleDateFormat dateFormatter = new SimpleDateFormat("dd-MM-yyyy");
-            SimpleDateFormat timeFormatter = new SimpleDateFormat("hh:mm a");
+            //   SimpleDateFormat timeFormatter = new SimpleDateFormat("hh:mm a");
             String dateAsString = dateFormatter.format(date);
-            String timeAsString = timeFormatter.format(date);
+            //  String timeAsString = timeFormatter.format(date);
             dateCurrent = dateAsString/* + " at " + timeAsString*/;
         } catch (Exception e) {
             ISFLog.e(e);

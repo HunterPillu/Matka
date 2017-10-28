@@ -23,4 +23,9 @@ public class Constant {
     public static final String TITLE_SHAKTI = "Shakti";
     public static final String TITLE_WORLY = "Worly";
     public static final String MSG_ENTER_PASSWORD = "Please enter valid password";
+    public static final String TITLE_RESULT_SUBMIT = "Submit Result";
+    public final static String DATE_FROMAT = "dd-MM-yyyy";
+    public static final String MSG_INCORRECT_PATTI_SINGLE = "Invalid patti or single ";
+    public static final String TABLE_USER_MASTER = "user_master";
+    public static final String MSG_FAILED_TO_UPDATE = "Failed to upload";
 }

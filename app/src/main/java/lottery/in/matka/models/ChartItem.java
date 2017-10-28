@@ -18,6 +18,15 @@ public class ChartItem {
     private boolean firstDayOfWeek;
     private String date;
     private long timeStamp;
+    private String key;
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
 
     public boolean isFirstDayOfWeek() {
         return firstDayOfWeek;
@@ -27,22 +36,14 @@ public class ChartItem {
         this.firstDayOfWeek = firstDayOfWeek;
     }
 
-    /* public String isMonday() {
-                return isMonday;
-            }
+    public long getTimeStamp() {
+        return timeStamp;
+    }
 
-            public void addMonday(boolean monday) {
-                isMonday = "" + monday;
-            }
+    public void setTimeStamp(long timeStamp) {
+        this.timeStamp = timeStamp;
+    }
 
-            public boolean checkIfMonday() {
-                return Boolean.parseBoolean(isMonday);
-            }
-
-            public void setMonday(String monday) {
-                isMonday = monday;
-            }
-        */
     public String getDate() {
         return date;
     }

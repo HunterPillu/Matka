@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +18,7 @@ import butterknife.ButterKnife;
 import lottery.in.matka.R;
 import lottery.in.matka.adapters.ChartAdapter;
 import lottery.in.matka.models.ChartItem;
+import lottery.in.matka.utils.Constant;
 import lottery.in.matka.utils.ISFLog;
 
 public class ChartFragment extends BaseFragment {
@@ -66,39 +66,6 @@ public class ChartFragment extends BaseFragment {
         }
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        //activity.selectedFragment = this;
-        try {
-            if (getView() != null) {
-                getView().setFocusableInTouchMode(true);
-                getView().requestFocus();
-                getView().setOnKeyListener(new View.OnKeyListener() {
-                    @Override
-                    public boolean onKey(View v, int keyCode, KeyEvent event) {
-                        if (event.getAction() == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_BACK) {
-                            onBackPressed();
-                        }
-                        return true;
-                    }
-                });
-            }
-        } catch (Exception e) {
-            ISFLog.e(e);
-        }
-    }
-
-    /*@OnClick({R.id.fab})
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.fab:
-                startActivity(new Intent(activity, MainActivity.class)
-                        .putExtra(Constant.INTRO_ID, Constant.UNSAVED).putExtra(Constant.IS_EDITABLE, true));
-                break;
-        }
-    }*/
-
     public void onBackPressed() {
         try {
             fragmentManager.popBackStack();
@@ -108,10 +75,17 @@ public class ChartFragment extends BaseFragment {
     }
 
 
-    public static Fragment newInstance(String showChartFor, String title, List<ChartItem> response) {
+    public static Fragment newInstance(String showChartFor, List<ChartItem> response) {
         ChartFragment fragment = new ChartFragment();
         fragment.chartItemList = response;
-        fragment.title = title;
+        if (showChartFor.equals(Constant.TABLE_CHART_BHOOTNATH)) {
+            fragment.title = Constant.TITLE_BHOOTNATH;
+        } else if (showChartFor.equals(Constant.TABLE_CHART_SHAKTI)) {
+            fragment.title = Constant.TITLE_SHAKTI;
+        } else if (showChartFor.equals(Constant.TABLE_CHART_WORLY)) {
+            fragment.title = Constant.TITLE_WORLY;
+        }
+
         fragment.SHOW_CHART_FOR = showChartFor;
         return fragment;
     }

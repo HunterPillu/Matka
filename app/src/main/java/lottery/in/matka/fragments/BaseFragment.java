@@ -14,7 +14,6 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
-import java.io.File;
 import java.util.List;
 
 import lottery.in.matka.MainActivity;
@@ -36,34 +35,6 @@ public abstract class BaseFragment extends Fragment {
     }
 
     public ProgressDialog progressDialog;
-
-    /**
-     * create directory
-     *
-     * @return
-     */
-    public void makeDir(String image_path_source_temp) {
-        File dir = new File(image_path_source_temp);
-        try {
-            if (dir.mkdir()) {
-            } else {
-            }
-        } catch (Exception e) {
-            ISFLog.e(e);
-        }
-    }
-
-/*    public void askForPermission(Context context, PermissionListener permissionlistener, String permission) {
-        try {
-            new TedPermission(context)
-                    .setPermissionListener(permissionlistener)
-                    .setDeniedMessage("If you reject permission,you can not use these services\n\nPlease turn on permissions at [Setting] > [Permission]")
-                    .setPermissions(permission)
-                    .check();
-        } catch (Exception e) {
-            ISFLog.e(e);
-        }
-    }*/
 
     /*void dialogWithButton(Context context, String msg) {
         try {
@@ -337,13 +308,14 @@ public abstract class BaseFragment extends Fragment {
         }
     }*/
 
-    public void gotoChartFragment(Fragment prevFrag, String showChartFor, String title, List<ChartItem> response) {
+    public void gotoChartFragment(Fragment prevFrag, String showChartFor, List<ChartItem> response) {
         //    Resources res = context.getResources();
-        Fragment newFrag = ChartFragment.newInstance(showChartFor, title, response);
+        Fragment newFrag = ChartFragment.newInstance(showChartFor, response);
 
         try {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                //   prevFrag.setExitTransition(new Explode());
+                prevFrag.setExitTransition(new Explode());
+                prevFrag.setEnterTransition(new Explode());
                 newFrag.setSharedElementEnterTransition(new DetailsTransition());
                 newFrag.setEnterTransition(new Explode());
                 newFrag.setExitTransition(new Explode());
@@ -389,7 +361,7 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        //activity.selectedFragment = this;
+        activity.currentFragment = this;
         try {
             if (getView() != null) {
                 getView().setFocusableInTouchMode(true);

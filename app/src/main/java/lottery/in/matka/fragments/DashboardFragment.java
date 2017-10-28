@@ -45,10 +45,12 @@ public class DashboardFragment extends BaseFragment implements DatabaseListener 
             case R.id.cvGameBN:
                 //  gotoChartFragment(this, Constant.TABLE_CHART_BHOOTNATH, Constant.TITLE_BHOOTNATH);
                 activity.fetchChart(this, Constant.TABLE_CHART_BHOOTNATH);
+                //  activity.fetchChart(this, Constant.TABLE_CHART_SHAKTI);
                 break;
             case R.id.cvGameWorly:
                 //  gotoChartFragment(this, Constant.TABLE_CHART_WORLY, Constant.TITLE_WORLY);
                 activity.fetchChart(this, Constant.TABLE_CHART_WORLY);
+                //activity.fetchChart(this, Constant.TABLE_CHART_SHAKTI);
                 break;
             case R.id.cvGameShakti:
                 // gotoChartFragment(this, Constant.TABLE_CHART_SHAKTI, Constant.TITLE_SHAKTI);
@@ -111,9 +113,9 @@ public class DashboardFragment extends BaseFragment implements DatabaseListener 
 
 
     @Override
-    public void onSuccess(String code, List<ChartItem> response) {
+    public void onSuccess(String tableName, List<ChartItem> response) {
         hideBaseLoader();
-        gotoChartFragment(this, Constant.TABLE_CHART_SHAKTI, Constant.TITLE_SHAKTI, response);
+        gotoChartFragment(this, tableName, response);
     }
 
     @Override
