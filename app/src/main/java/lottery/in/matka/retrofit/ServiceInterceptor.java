@@ -10,7 +10,7 @@ import okhttp3.Response;
  * Created by desktop on 28-10-2017.
  */
 
-public class ServiceInterceptor implements Interceptor {
+public class ServiceInterceptor implements Interceptor {//
 
     @Override
     public Response intercept(Chain chain) throws IOException {

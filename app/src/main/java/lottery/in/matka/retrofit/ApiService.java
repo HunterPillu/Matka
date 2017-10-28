@@ -10,7 +10,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 /**
  * Created by desktop on 28-10-2017.
  */
-
+//
 public class ApiService {
     private static String BASE_URL_FIREBASE = "https://fcm.googleapis.com/fcm/";
     public static Retrofit getRetrofitClient() {

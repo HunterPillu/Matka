@@ -24,7 +24,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     private static final String TAG = "Firebase_MSG";
 
     @Override
-    public void onMessageReceived(RemoteMessage remoteMessage) {
+    public void onMessageReceived(RemoteMessage remoteMessage) {//
         // TODO(developer): Handle FCM messages here.
         // If the application is in the foreground handle both data and notification messages here.
         // Also if you intend on generating your own notifications as a result of a received FCM

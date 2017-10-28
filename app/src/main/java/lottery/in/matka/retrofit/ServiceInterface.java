@@ -10,7 +10,7 @@ import retrofit2.http.POST;
  * Created by desktop on 28-10-2017.
  */
 
-public interface ServiceInterface {
+public interface ServiceInterface {//
 
     @POST("send")
     Call<ServiceResponse> sendNotification(@Body JsonObject object);
