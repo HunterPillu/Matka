@@ -4,19 +4,53 @@ import android.text.TextUtils;
 
 import com.google.firebase.database.IgnoreExtraProperties;
 
-import java.util.Date;
+import lottery.in.matka.utils.Constant;
 
 /**
  * Created by WarFly on 10/22/2017.
  */
 @IgnoreExtraProperties
 public class ChartItem {
-    private String pattiOpen = "239";//Constant.EMPTY;
-    private String pattiClose = "890";//Constant.EMPTY;
-    private String singleOpen = "2";//Constant.EMPTY;
-    private String singleClose = "7";//Constant.EMPTY;
-    private boolean isMonday;
-    private Date Date = new Date();
+    private String pattiOpen = Constant.EMPTY;
+    private String pattiClose = Constant.EMPTY;
+    private String singleOpen = Constant.EMPTY;
+    private String singleClose = Constant.EMPTY;
+    private boolean firstDayOfWeek;
+    private String date;
+    private long timeStamp;
+    private String key;
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
+
+    public boolean isFirstDayOfWeek() {
+        return firstDayOfWeek;
+    }
+
+    public void setFirstDayOfWeek(boolean firstDayOfWeek) {
+        this.firstDayOfWeek = firstDayOfWeek;
+    }
+
+    public long getTimeStamp() {
+        return timeStamp;
+    }
+
+    public void setTimeStamp(long timeStamp) {
+        this.timeStamp = timeStamp;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
 
     public String getPattiOpen() {
         return pattiOpen;

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="48sp"
+    android:layout_margin="1sp"
+    android:padding="2sp">
+
+    <!--<android.support.v7.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center">-->
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/tvDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:paddingRight="2sp"
+        android:text="23 02\n 2017" />
+
+    <!--  </android.support.v7.widget.LinearLayoutCompat>-->
+
+</android.support.v7.widget.CardView>

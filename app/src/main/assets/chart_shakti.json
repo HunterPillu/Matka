@@ -1,256 +1,256 @@
 {
   "chart_shakti": [
     {
-      "Date": "Oct 23, 2017 12:39:23 PM",
-      "isMonday": false,
+      "date": "Oct 23, 2017 11:00:05 PM",
+      "firstDayOfWeek":true,
+      "pattiClose": "800",
+      "pattiOpen": "239",
+      "singleClose": "8",
+      "singleOpen": "2"
+    },
+    {
+      "date": "Oct 23, 2017 12:39:23 PM",
+      "firstDayOfWeek": false,
       "pattiClose": "890",
       "pattiOpen": "239",
       "singleClose": "7",
       "singleOpen": "2"
     },
     {
-      "Date": "Oct 23, 2017 12:39:23 PM",
-      "isMonday": false,
+      "date": "Oct 23, 2017 12:39:23 PM",
+      "firstDayOfWeek": false,
       "pattiClose": "890",
       "pattiOpen": "239",
       "singleClose": "7",
       "singleOpen": "2"
     },
     {
-      "Date": "Oct 23, 2017 12:39:23 PM",
-      "isMonday": false,
+      "date": "Oct 23, 2017 12:39:23 PM",
+      "firstDayOfWeek": false,
       "pattiClose": "890",
       "pattiOpen": "239",
       "singleClose": "7",
       "singleOpen": "2"
     },
     {
-      "Date": "Oct 23, 2017 12:39:23 PM",
-      "isMonday": false,
+      "date": "Oct 23, 2017 12:39:23 PM",
+      "firstDayOfWeek": false,
       "pattiClose": "890",
       "pattiOpen": "239",
       "singleClose": "7",
       "singleOpen": "2"
     },
     {
-      "Date": "Oct 23, 2017 12:39:23 PM",
-      "isMonday": false,
+      "date": "Oct 23, 2017 12:39:23 PM",
+      "firstDayOfWeek": false,
       "pattiClose": "890",
       "pattiOpen": "239",
       "singleClose": "7",
       "singleOpen": "2"
     },
     {
-      "Date": "Oct 23, 2017 12:39:23 PM",
-      "isMonday": false,
+      "date": "Oct 23, 2017 12:39:23 PM",
+      "firstDayOfWeek": true,
+      "pattiClose": "900",
+      "pattiOpen": "239",
+      "singleClose": "9",
+      "singleOpen": "2"
+    },
+    {
+      "date": "Oct 23, 2017 12:39:23 PM",
+      "firstDayOfWeek": false,
       "pattiClose": "890",
       "pattiOpen": "239",
       "singleClose": "7",
       "singleOpen": "2"
     },
     {
-      "Date": "Oct 23, 2017 12:39:23 PM",
-      "isMonday": false,
+      "date": "Oct 23, 2017 12:39:23 PM",
+      "firstDayOfWeek": false,
       "pattiClose": "890",
       "pattiOpen": "239",
       "singleClose": "7",
       "singleOpen": "2"
     },
     {
-      "Date": "Oct 23, 2017 12:39:23 PM",
-      "isMonday": false,
+      "date": "Oct 23, 2017 12:39:23 PM",
+      "firstDayOfWeek": false,
       "pattiClose": "890",
       "pattiOpen": "239",
       "singleClose": "7",
       "singleOpen": "2"
     },
     {
-      "Date": "Oct 23, 2017 12:39:23 PM",
-      "isMonday": false,
+      "date": "Oct 23, 2017 12:39:23 PM",
+      "firstDayOfWeek": false,
       "pattiClose": "890",
       "pattiOpen": "239",
       "singleClose": "7",
       "singleOpen": "2"
     },
     {
-      "Date": "Oct 23, 2017 12:39:23 PM",
-      "isMonday": false,
+      "date": "Oct 23, 2017 12:39:23 PM",
+      "firstDayOfWeek": false,
       "pattiClose": "890",
       "pattiOpen": "239",
       "singleClose": "7",
       "singleOpen": "2"
     },
     {
-      "Date": "Oct 23, 2017 12:39:23 PM",
-      "isMonday": false,
+      "date": "Oct 23, 2017 12:39:23 PM",
+      "firstDayOfWeek": false,
       "pattiClose": "890",
       "pattiOpen": "239",
       "singleClose": "7",
       "singleOpen": "2"
     },
     {
-      "Date": "Oct 23, 2017 12:39:23 PM",
-      "isMonday": false,
+      "date": "Oct 23, 2017 12:39:23 PM",
+      "firstDayOfWeek": false,
       "pattiClose": "890",
       "pattiOpen": "239",
       "singleClose": "7",
       "singleOpen": "2"
     },
     {
-      "Date": "Oct 23, 2017 12:39:23 PM",
-      "isMonday": false,
+      "date": "Oct 23, 2017 12:39:23 PM",
+      "firstDayOfWeek": false,
       "pattiClose": "890",
       "pattiOpen": "239",
       "singleClose": "7",
       "singleOpen": "2"
     },
     {
-      "Date": "Oct 23, 2017 12:39:23 PM",
-      "isMonday": false,
+      "date": "Oct 23, 2017 12:39:23 PM",
+      "firstDayOfWeek": false,
       "pattiClose": "890",
       "pattiOpen": "239",
       "singleClose": "7",
       "singleOpen": "2"
     },
     {
-      "Date": "Oct 23, 2017 12:39:23 PM",
-      "isMonday": false,
+      "date": "Oct 23, 2017 12:39:23 PM",
+      "firstDayOfWeek": false,
       "pattiClose": "890",
       "pattiOpen": "239",
       "singleClose": "7",
       "singleOpen": "2"
     },
     {
-      "Date": "Oct 23, 2017 12:39:23 PM",
-      "isMonday": false,
+      "date": "Oct 23, 2017 12:39:23 PM",
+      "firstDayOfWeek": false,
       "pattiClose": "890",
       "pattiOpen": "239",
       "singleClose": "7",
       "singleOpen": "2"
     },
     {
-      "Date": "Oct 23, 2017 12:39:23 PM",
-      "isMonday": false,
+      "date": "Oct 23, 2017 12:39:23 PM",
+      "firstDayOfWeek": false,
       "pattiClose": "890",
       "pattiOpen": "239",
       "singleClose": "7",
       "singleOpen": "2"
     },
     {
-      "Date": "Oct 23, 2017 12:39:23 PM",
-      "isMonday": false,
+      "date": "Oct 23, 2017 12:39:23 PM",
+      "firstDayOfWeek": false,
       "pattiClose": "890",
       "pattiOpen": "239",
       "singleClose": "7",
       "singleOpen": "2"
     },
     {
-      "Date": "Oct 23, 2017 12:39:23 PM",
-      "isMonday": false,
+      "date": "Oct 23, 2017 12:39:23 PM",
+      "firstDayOfWeek": false,
       "pattiClose": "890",
       "pattiOpen": "239",
       "singleClose": "7",
       "singleOpen": "2"
     },
     {
-      "Date": "Oct 23, 2017 12:39:23 PM",
-      "isMonday": false,
+      "date": "Oct 23, 2017 12:39:23 PM",
+      "firstDayOfWeek": false,
       "pattiClose": "890",
       "pattiOpen": "239",
       "singleClose": "7",
       "singleOpen": "2"
     },
     {
-      "Date": "Oct 23, 2017 12:39:23 PM",
-      "isMonday": false,
+      "date": "Oct 23, 2017 12:39:23 PM",
+      "firstDayOfWeek": false,
       "pattiClose": "890",
       "pattiOpen": "239",
       "singleClose": "7",
       "singleOpen": "2"
     },
     {
-      "Date": "Oct 23, 2017 12:39:23 PM",
-      "isMonday": false,
+      "date": "Oct 23, 2017 12:39:23 PM",
+      "firstDayOfWeek": false,
       "pattiClose": "890",
       "pattiOpen": "239",
       "singleClose": "7",
       "singleOpen": "2"
     },
     {
-      "Date": "Oct 23, 2017 12:39:23 PM",
-      "isMonday": false,
+      "date": "Oct 23, 2017 12:39:23 PM",
+      "firstDayOfWeek": false,
       "pattiClose": "890",
       "pattiOpen": "239",
       "singleClose": "7",
       "singleOpen": "2"
     },
     {
-      "Date": "Oct 23, 2017 12:39:23 PM",
-      "isMonday": false,
+      "date": "Oct 23, 2017 12:39:23 PM",
+      "firstDayOfWeek": false,
       "pattiClose": "890",
       "pattiOpen": "239",
       "singleClose": "7",
       "singleOpen": "2"
     },
     {
-      "Date": "Oct 23, 2017 12:39:23 PM",
-      "isMonday": false,
+      "date": "Oct 23, 2017 12:39:23 PM",
+      "firstDayOfWeek": false,
       "pattiClose": "890",
       "pattiOpen": "239",
       "singleClose": "7",
       "singleOpen": "2"
     },
     {
-      "Date": "Oct 23, 2017 12:39:23 PM",
-      "isMonday": false,
+      "date": "Oct 23, 2017 12:39:23 PM",
+      "firstDayOfWeek": false,
       "pattiClose": "890",
       "pattiOpen": "239",
       "singleClose": "7",
       "singleOpen": "2"
     },
     {
-      "Date": "Oct 23, 2017 12:39:23 PM",
-      "isMonday": false,
+      "date": "Oct 23, 2017 12:39:23 PM",
+      "firstDayOfWeek": false,
       "pattiClose": "890",
       "pattiOpen": "239",
       "singleClose": "7",
       "singleOpen": "2"
     },
     {
-      "Date": "Oct 23, 2017 12:39:23 PM",
-      "isMonday": false,
+      "date": "Oct 23, 2017 12:39:23 PM",
+      "firstDayOfWeek": false,
       "pattiClose": "890",
       "pattiOpen": "239",
       "singleClose": "7",
       "singleOpen": "2"
     },
     {
-      "Date": "Oct 23, 2017 12:39:23 PM",
-      "isMonday": false,
+      "date": "Oct 23, 2017 12:39:23 PM",
+      "firstDayOfWeek": false,
       "pattiClose": "890",
       "pattiOpen": "239",
       "singleClose": "7",
       "singleOpen": "2"
     },
     {
-      "Date": "Oct 23, 2017 12:39:23 PM",
-      "isMonday": false,
-      "pattiClose": "890",
-      "pattiOpen": "239",
-      "singleClose": "7",
-      "singleOpen": "2"
-    },
-    {
-      "Date": "Oct 23, 2017 12:39:23 PM",
-      "isMonday": false,
-      "pattiClose": "890",
-      "pattiOpen": "239",
-      "singleClose": "7",
-      "singleOpen": "2"
-    },
-    {
-      "Date": "Oct 23, 2017 12:39:23 PM",
-      "isMonday": false,
+      "date": "Oct 23, 2017 12:39:23 PM",
+      "firstDayOfWeek": false,
       "pattiClose": "890",
       "pattiOpen": "239",
       "singleClose": "7",

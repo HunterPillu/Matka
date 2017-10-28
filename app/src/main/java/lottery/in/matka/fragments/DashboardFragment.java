@@ -2,19 +2,22 @@ package lottery.in.matka.fragments;
 
 
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.List;
+
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import lottery.in.matka.R;
+import lottery.in.matka.interfaces.DatabaseListener;
+import lottery.in.matka.models.ChartItem;
 import lottery.in.matka.utils.Constant;
 import lottery.in.matka.utils.ISFLog;
 import lottery.in.matka.utils.Util;
 
-public class DashboardFragment extends BaseFragment {
+public class DashboardFragment extends BaseFragment implements DatabaseListener {
 
 
     private View v;
@@ -27,60 +30,35 @@ public class DashboardFragment extends BaseFragment {
         try {
             ButterKnife.bind(this, v);
 
-            //initRecycleview();
+
         } catch (Exception e) {
             ISFLog.e(e);
         }
         return v;
     }
 
-    /*private void initRecycleview() {
-        try {
-            recyclerView.setHasFixedSize(true);
-            LinearLayoutManager layoutManager = new LinearLayoutManager(context);
-            recyclerView.setLayoutManager(layoutManager);
-            adapter = new ContactDetailsAdapter(context, fragmentManager, distList);
-            recyclerView.setAdapter(adapter);
 
-        } catch (Exception e) {
-            ISFLog.e(e);
-        }
-    }*/
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        //activity.selectedFragment = this;
-        try {
-            if (getView() != null) {
-                getView().setFocusableInTouchMode(true);
-                getView().requestFocus();
-                getView().setOnKeyListener(new View.OnKeyListener() {
-                    @Override
-                    public boolean onKey(View v, int keyCode, KeyEvent event) {
-                        if (event.getAction() == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_BACK) {
-                            onBackPressed();
-                        }
-                        return true;
-                    }
-                });
-            }
-        } catch (Exception e) {
-            ISFLog.e(e);
-        }
-    }
-
-    @OnClick({R.id.cvGameBN, R.id.cvGameWorly, R.id.cvGameShakti})
+    @OnClick({R.id.cvGameBN, R.id.cvGameWorly, R.id.cvGameShakti, R.id.tvAdmin})
     public void onClick(View v) {
+        showBaseLoader(Constant.MSG_PLEASE_WAIT);
         switch (v.getId()) {
             case R.id.cvGameBN:
-                gotoChartFragment(this, Constant.FOR_BHOOTHNATH);
+                //  gotoChartFragment(this, Constant.TABLE_CHART_BHOOTNATH, Constant.TITLE_BHOOTNATH);
+                activity.fetchChart(this, Constant.TABLE_CHART_BHOOTNATH);
+                //  activity.fetchChart(this, Constant.TABLE_CHART_SHAKTI);
                 break;
             case R.id.cvGameWorly:
-                gotoChartFragment(this, Constant.FOR_WORLY);
+                //  gotoChartFragment(this, Constant.TABLE_CHART_WORLY, Constant.TITLE_WORLY);
+                activity.fetchChart(this, Constant.TABLE_CHART_WORLY);
+                //activity.fetchChart(this, Constant.TABLE_CHART_SHAKTI);
                 break;
             case R.id.cvGameShakti:
-                gotoChartFragment(this, Constant.FOR_SHAKTI);
+                // gotoChartFragment(this, Constant.TABLE_CHART_SHAKTI, Constant.TITLE_SHAKTI);
+                activity.fetchChart(this, Constant.TABLE_CHART_SHAKTI);
+                break;
+            case R.id.tvAdmin:
+                hideBaseLoader();
+                new LoginFragment().show(fragmentManager, "login");
                 break;
         }
     }
@@ -97,5 +75,52 @@ public class DashboardFragment extends BaseFragment {
         } catch (Exception e) {
             ISFLog.e(e);
         }
+    }
+
+ /*   public void dialogLogin() {
+        try {
+
+            if (null != progressDialog && progressDialog.isShowing()) {
+                progressDialog.dismiss();
+            }
+            progressDialog = new ProgressDialog(context);
+            progressDialog = ProgressDialog.show(context, "", "", true);
+            progressDialog.setCanceledOnTouchOutside(true);
+            progressDialog.setCancelable(true);
+            progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+            progressDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+            progressDialog.setContentView(R.layout.dialog_login);
+
+            AppCompatButton bLogin = (AppCompatButton) progressDialog.findViewById(R.id.bLogin);
+            final EditText etPassword = (EditText) progressDialog.findViewById(R.id.etPassword);
+            bLogin.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    progressDialog.dismiss();
+                    String password = etPassword.getText().toString();
+                    if (TextUtils.isEmpty(password)) {
+                        etPassword.setError(Constant.MSG_ENTER_PASSWORD);
+                    } else {
+                        checkLogin(password);
+                    }
+
+                }
+            });
+        } catch (Exception e) {
+            ISFLog.e(e);
+        }
+    }*/
+
+
+    @Override
+    public void onSuccess(String tableName, List<ChartItem> response) {
+        hideBaseLoader();
+        gotoChartFragment(this, tableName, response);
+    }
+
+    @Override
+    public void onFailure(Exception e) {
+        hideBaseLoader();
+        ISFLog.e(e);
     }
 }
