@@ -29,14 +29,11 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         // If the application is in the foreground handle both data and notification messages here.
         // Also if you intend on generating your own notifications as a result of a received FCM
         // message, here is where that should be initiated. See sendNotification method below.
-        String title = remoteMessage.getNotification().getTitle();
-
-        if (null == title) {
-            title = "Aspire Notification";
-        }
-        sendNotification(remoteMessage.getNotification().getBody(), title);
-        ISFLog.e(TAG, "From: " + remoteMessage.getFrom());
-        ISFLog.e(TAG, "Notification Message Body: " + remoteMessage.getNotification().getBody());
+        //String title = remoteMessage.getNotification().getTitle();
+        String title = "Aspire Notification";
+        sendNotification(remoteMessage.getData().get("msg"), title);
+        //ISFLog.e(TAG, "From: " + remoteMessage.getFrom());
+        //ISFLog.e(TAG, "Notification Message Body: " + remoteMessage.getNotification().getBody());
     }
 
     private void sendNotification(String messageBody, String title) {
