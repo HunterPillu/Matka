@@ -30,6 +30,7 @@ import java.util.List;
 
 import lottery.in.matka.fragments.BaseFragment;
 import lottery.in.matka.interfaces.DatabaseListener;
+import lottery.in.matka.interfaces.TokenListener;
 import lottery.in.matka.models.ChartItem;
 import lottery.in.matka.models.UserToken;
 import lottery.in.matka.utils.Constant;
@@ -150,10 +151,11 @@ public abstract class FirebaseAcitivity extends AppCompatActivity {
                         // If sign in fails, display a message to the user. If sign in succeeds
                         // the auth state listener will be notified and logic to handle the
                         // signed in user can be handled in the listener.
+
                         if (!task.isSuccessful()) {
                             Util.showToast(FirebaseAcitivity.this, Constant.AUTH_FAIL);
                         } else {
-                            String token =FirebaseInstanceId.getInstance().getToken();
+                            String token = FirebaseInstanceId.getInstance().getToken();
                             ISFLog.e("Firebase", "token "+ token);
                             saveUserToken(new UserToken(token));
                             if (null == currentFragment) {
@@ -175,6 +177,35 @@ public abstract class FirebaseAcitivity extends AppCompatActivity {
         TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
         ISFLog.e("imei number ", telephonyManager.getDeviceId());
         return telephonyManager.getDeviceId();
+    }
+
+    public void fetchUserTokens(final TokenListener listener, final String tableName) {
+
+        ValueEventListener gameValueListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                ISFLog.d(Constant.TABLE_USER_MASTER, "onDataChange");
+                List<UserToken> userTokens = new ArrayList<>();
+                try {
+                    for (DataSnapshot snap : dataSnapshot.getChildren()) {
+                        userTokens.add(snap.getValue(UserToken.class));
+                    }
+                } catch (Exception e) {
+                    ISFLog.e(e);
+                }
+                listener.onSuccess(tableName, userTokens);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                listener.onFailure(databaseError.toException());
+            }
+        };
+        try {
+            mDatabase.child(tableName).addListenerForSingleValueEvent(gameValueListener);
+        } catch (Exception e) {
+            ISFLog.e(e);
+        }
     }
 
     public void fetchChart(final DatabaseListener listener, final String tableName) {

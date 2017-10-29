@@ -7,7 +7,12 @@ import com.google.firebase.database.IgnoreExtraProperties;
  */
 @IgnoreExtraProperties
 public class UserToken {
-    private String token;
+    public String token;
+
+    public UserToken()
+    {
+
+    }
 
     public UserToken(String token) {
         this.token = token;
